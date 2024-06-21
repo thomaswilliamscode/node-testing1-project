@@ -8,7 +8,23 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+  const newObj = {};
+
+  for (let key in obj) {
+    if ( typeof obj[key] === 'string') {
+      newObj[key] = obj[key].trim();
+    } else {
+      newObj[key] = obj[key]
+    }
+  }
+  return newObj
+
 }
+// let obj = {
+//   name: '      thomas  ',
+//   bio: ' Greatest Wizzard   Eva '
+// }
+// console.log(trimProperties(obj))
 
 /**
  * [Exercise 2] trimPropertiesMutation trims in place the properties of an object
@@ -20,7 +36,21 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
+  for (let key in obj) {
+		if (typeof obj[key] === 'string') {
+			obj[key] = obj[key].trim();
+		} else {
+			obj[key] = obj[key];
+		}
+	}
+	return obj;
 }
+
+// let obj = {
+//   name: '      thomas  ',
+//   bio: ' Greatest Wizzard   Eva '
+// }
+// console.log(trimPropertiesMutation(obj))
 
 /**
  * [Exercise 3] findLargestInteger finds the largest integer in an array of objects { integer: 1 }
@@ -32,7 +62,17 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+  let largestNum = 0;
+  for (let num of integers) {
+    if (num.integer > largestNum) {
+      largestNum = num.integer
+    }
+  }
+  return largestNum
 }
+
+// const input = [{ integer: 2 }, { integer: 5 }, { integer: 10 }, { integer: 1 }];
+// console.log(findLargestInteger(input))
 
 class Counter {
   /**
@@ -41,6 +81,8 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.start = false
+    this.count = initialNumber
   }
 
   /**
@@ -57,6 +99,17 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    if (this.start === false) {
+      this.start = true;
+      return this.count;
+    } else {
+      if (this.count === 0) {
+      return this.count
+    } else {
+      this.count --
+      return this.count;
+    }
+    }
   }
 }
 
@@ -66,6 +119,9 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.start = false;
+    this.current = 0
   }
 
   /**
@@ -82,8 +138,33 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    if (this.start === false) {
+      this.start = true;
+      return this.seasons[0]
+    } else {
+      if (this.current < this.seasons.length - 1) {
+        this.current ++ 
+        return this.seasons[this.current]
+      } else {
+        this.current = 0
+        return this.seasons[this.current]
+      }
+    }
   }
 }
+
+// const test = new Seasons
+// for (let i = 1; i < 40; i++) {
+//   console.log(i)
+//   test.next()
+// }
+// console.log(test.next());
+
+// console.log(test.next())
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
 
 class Car {
   /**
@@ -95,6 +176,8 @@ class Car {
   constructor(name, tankSize, mpg) {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
+    this.tankSize = tankSize
+    this.mpg = mpg
     // ✨ initialize whatever other properties are needed
   }
 
@@ -113,6 +196,17 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+    let milesCanDrive = this.tank * this.mpg
+    if (milesCanDrive >= distance) {
+      this.odometer = this.odometer + distance;
+      milesCanDrive = milesCanDrive - distance
+      let gallons = milesCanDrive / this.mpg
+      this.tank = gallons
+      return this.odometer;
+    } else {
+      return this.tankSize * this.mpg
+    }
+    
   }
 
   /**
@@ -128,6 +222,11 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    if (this.tankSize >= (this.tank + gallons)) {
+      return gallons;
+    } else {
+      return this.tankSize;
+    }
   }
 }
 
@@ -146,6 +245,8 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  let answer = number % 2 === 0;
+  return answer
 }
 
 module.exports = {
